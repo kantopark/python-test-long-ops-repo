@@ -1,0 +1,24 @@
+setup:
+  build: false
+  commit: master
+  image: danielbok/nida-python:3.7.5
+
+steps:
+  # elements in steps are executed in order with the name representing the step name
+  # step names must be unique. For each task within the step, their names must be unique.
+  # however, the name need not be unique across steps. Thus, you could have Step1:Fn1
+  # and Step2:Fn1. Even though the function names are both Fn1, since they belong to
+  # different steps, it is okay
+  - name: Long Operations
+    tasks:
+      # elements in list are executed together
+      - name: Wait 5s then print something
+        cmd: short_ops_2s.py
+
+      - name: Wait 10s then print something
+        cmd: long_ops_5s.py
+
+  - name: Random number generator
+    tasks:
+      - name: Prints random number
+        cmd: final_ops.py
